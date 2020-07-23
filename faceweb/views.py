@@ -64,7 +64,7 @@ def employees(request,status_slug=None):
 @login_required(login_url='home')
 def timesheet(request):
     clocking = None
-    clocking = Clocking.objects.order_by('employee_id', '-datetime').distinct('employee_id')
+    clocking = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'))
     date = datetime.date.today()
     clocking_filter = ClockingFilter(request.GET,queryset=clocking)
     clocking = clocking_filter.qs
