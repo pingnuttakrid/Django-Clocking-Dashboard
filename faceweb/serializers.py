@@ -15,8 +15,10 @@ class ClockingSerializer(ModelSerializer):
          'employee_id',
          'door',
          'temp',
-	 'datetime'	  
-      ]
+         'date',
+         'time',
+	     'datetime'
+         ]
 
 class imageSerializer(ModelSerializer):
 
