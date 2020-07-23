@@ -68,7 +68,6 @@ def timesheet(request):
     date = datetime.date.today()
     clocking_filter = ClockingFilter(request.GET,queryset=clocking)
     clocking = clocking_filter.qs
-    print(clocking_filter)
     
     return render(request,'timesheet.html',{'clockings':clocking,'date':date,'filter':clocking_filter})
 
