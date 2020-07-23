@@ -28,7 +28,7 @@ class Employee(models.Model):
       imgright = models.ImageField(upload_to ='employee',null=True,default ='none/no-img.jpg')
       
       def __str__(self):
-        return self.employee_id
+        return self.employee_idd
     
       def get_url(self):
         return reverse('employee_detail',args=[self.status.slug,self.slug])
