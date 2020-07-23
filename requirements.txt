@@ -140,8 +140,6 @@ sqlparse==0.2.4
 termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
-torch==0.4.1
-torchvision==0.2.1
 tornado==6.0.3
 traitlets==4.3.3
 urllib3==1.25.7
