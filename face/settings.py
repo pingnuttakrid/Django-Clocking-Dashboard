@@ -25,12 +25,12 @@ SECRET_KEY = '@u+)-f#h3y_3y(kr%!&1^qfi^9v1^y_ok!dph^kpb=dtdq^xgl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://pure-garden-09199.herokuapp.com/']
+ALLOWED_HOSTS = ['*','https://glacial-gorge-87635.herokuapp.com/']
 
 
-STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static2')]
 
-
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL='/media/'
 STATIC_URL='/static/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'static','media')
