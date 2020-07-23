@@ -1,0 +1,104 @@
+{% extends 'layouts.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+<div class="containerr" style="position:absolute; top: 8.73%; left: 17.3%; width:82.5%;">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; left: 0%; width:100%; ">
+    <div class="card"style="position:absolute; left: 0%; width:100% " >
+        <div class="card-header" style="width: 100%;">
+            {% for employee in employee %}
+            <h4 class="mb-0" style='color: #064190;'><a href="{{employee.get_url}}" target="_blank" >{{employee.firstname}} {{employee.lastname}} </a></h4>
+            <p style="margin-top: 5px; margin-bottom: 3px; ">ID  &nbsp; &nbsp; {{employee.Type}}</p>
+            <p style="margin-top: 5px; margin-bottom: 3px; ">Clocking Information</p>
+            {% endfor %}
+        </div>
+        <div class="card-body" style="width: 80%;" >
+            <div class="table-responsive" style="width:100%">
+                <table id="example" class="table table-striped table-bordered second" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Door</th>
+                            <th>Temperature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for clocking in clockings %}
+                      <tr>
+                        <td>{{clocking.employee_id.firstname}} {{clocking.employee_id.lastname}}</td>
+                        <td>{{clocking.date}}</td>
+                        <td>{{clocking.time}}</td>
+                        <td>{{clocking.door}}</td>
+                        <td>{{clocking.temp}}</td>
+                     </tr>
+                     {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+ </div>
+</div>
+<form method="get" style="position: absolute; margin-left: 70% ; margin-top: 13.5%;">
+    <div class="container" style="width: 100%; margin-top:0%; margin-left:0%;">
+        
+        <div class="row">
+            <div class="form-group" style="margin-left: 1.5%; width: 100%;">
+                 <h5 style="height:100%;">Filters</h5>
+            </div>
+            <div class="form-group" style="margin-left: 1.5%;">
+                {{filter.form.door.label_tag}}
+                {% render_field filter.form.door class="form-control" %}
+            </div>   
+            <div class="form-group" style="margin-left:1.5%" >
+                {{filter.form.temp_min.label_tag}}
+                {% render_field filter.form.temp_min class="form-control" %}
+            </div>
+            <div class="form-group" style="margin-left:1.5%">
+                {{filter.form.start_date.label_tag}}
+                {% render_field filter.form.start_date class="form-control" %}
+            </div>
+            <div class="form-group" style="margin-left:1.5%">
+                {{filter.form.end_date.label_tag}}
+                {% render_field filter.form.end_date class="form-control" %}
+            </div>
+            <div class="form-group" style="margin-left:1.5%">
+                {{filter.form.start_time.label_tag}}
+                {% render_field filter.form.start_time class="form-control" %}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search"></span><i class="fas fa-search"></i>  Search 
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script src="{% static 'assets/vendor/jquery/jquery-3.3.1.min.js'%}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.js'%}"></script>
+<script src="{% static 'assets/vendor/slimscroll/jquery.slimscroll.js'%}"></script>
+<script src="{% static 'assets/vendor/multi-select/js/jquery.multi-select.js'%}"></script>
+<script src="{% static 'assets/libs/js/main-js.js'%}"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'assets/vendor/datatables/js/dataTables.bootstrap4.min.js'%}"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="{% static 'assets/vendor/datatables/js/buttons.bootstrap4.min.js'%}"></script>
+<script src="{% static 'assets/vendor/datatables/js/data-table.js'%}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+    
+
+{% endblock %}
+
+

@@ -1,0 +1,32 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="containerem">
+    <div class="row my-3">     
+    {% for employee in employees %}
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card-container" style="width: 103%;">
+        <img class="round" src="{{employee.imgprofile.url}}"  style="width: 127px; height: 128px" alt="user" />
+        <h5 class="card-title" style="color: white; margin-top:7px; margin-left:5px;"><a href="{{employee.get_url}}">{{employee.firstname}} {{employee.lastname}}</a></h5>
+        <h6 style="color: white; margin-top:9px; text-align: left ;margin-left:5px ;">Position</h6>
+        <h6 style="color: white;margin-top:12px; text-align: left ;margin-left:5px ;" >Team</h6>
+        <div class="card-footer" >
+          <h6 style="color:#064190;">Email</h6>
+          <p class="card-text" style="color:#2A2A2A;">{{employee.email}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+      
+    
+    
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}
