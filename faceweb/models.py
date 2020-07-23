@@ -12,8 +12,8 @@ class Status(models.Model):
          return reverse('employee_by_status',args=[self.slug])
 
 class Employee(models.Model):
-      title = models.CharField(max_length= 5 )
       employee_id = models.CharField(max_length=5)
+      title = models.CharField(max_length=5 )
       firstname = models.CharField(max_length=255)
       lastname = models.CharField(max_length=255)
       email = models.CharField(max_length=255)
