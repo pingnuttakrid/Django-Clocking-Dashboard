@@ -50,5 +50,3 @@ class Clocking(models.Model):
 class Image_Clocking(models.Model):
 	model_pic = models.ImageField(upload_to ='clocking',null=True,default ='none/no-img.jpg')
 	
-	def __str__(self):
-            return self.model_pic
