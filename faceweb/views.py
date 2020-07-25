@@ -117,3 +117,9 @@ def employeeTable(request,slug):
     clocking = clocking_filter.qs 
     
     return render(request,'employeeTable.html',{'clockings':clocking,'employee':employee,'filter':clocking_filter})
+
+
+
+@login_required(login_url='home')
+def register(request):
+    return render(request,'register.html')
