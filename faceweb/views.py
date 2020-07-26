@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.db.models import F, Max
 import datetime
 from .filters import ClockingFilter
-from .forms import EmployeeForm,ImageForm
+from .forms import EmployeeForm,ImageForm,RegisterForm 
 
 # Create your views here.
 class ClockingCreateAPIView(CreateAPIView):
@@ -120,6 +120,17 @@ def employeeTable(request,slug):
 
 
 
-@login_required(login_url='home')
+
 def register(request):
-    return render(request,'register.html')
+    if request.method == "POST":  
+        form = RegisterForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save()  
+                return redirect('employee_by_status')  
+            except:  
+                pass  
+    else:  
+        form = RegisterForm()    
+
+    return render(request,'register.html',{'form':form})

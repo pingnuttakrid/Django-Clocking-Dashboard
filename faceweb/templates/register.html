@@ -2,131 +2,154 @@
 {% load static %}
 {% block content %}
 {% load widget_tweaks %}
-<div class="containerr" style="position:absolute; top: 8.74%; left: 17.4%; width:82.62%;">
+<div class="containerr" style="position:absolute; top: 8.74%; left: 17.4%; width:82.5%; background-color: teal;">
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; left: 0%; width:100%; ">
-    <div class="card"style="position:absolute; left: 0%; width:100% " >
+    <div class="card"style="position:absolute; left: 0% ;width:100%;" >
         <div class="card-header" style="width: 100%;">
-            <h4 class="mb-0" style="color: #064190; margin-top: 1%;">Register</h4>
-            <p style="margin-top:0.7%;">Form for register employee to the company.</p>
+            <h3 class="mb-0" style="color: #064190; margin-top: 1%;margin-left: 5%;">Register</h3>
+            <p style="margin-top:0.7%;margin-left: 5%;">Form for register employee to the company.</p>
         </div>
-        <div class="card-body" style="width: 100%;">
-            <body class="form-v10">
-                <div class="page-content">
-                    <div class="form-v10-content">
-                        <form class="form-detail" action="#" method="post" id="myform">
-                            <div class="form-left">
-                                <h2>General Infomation</h2>
-                                <div class="form-row">
-                                    <select name="title">
-                                        <option class="option" value="title">Title</option>
-                                        <option class="option" value="businessman">Businessman</option>
-                                        <option class="option" value="reporter">Reporter</option>
-                                        <option class="option" value="secretary">Secretary</option>
-                                    </select>
-                                    <span class="select-btn">
-                                          <i class="zmdi zmdi-chevron-down"></i>
-                                    </span>
+        <div class="card-body" style="width:100%;">
+                
+            <div class="form-v10-content">
+                    <form class="form-detail" action="#" method="post" id="myform">
+                        {% csrf_token %}
+                        <div class="form-left">
+                            <h2 style="color:#212529;">General Infomation</h2>
+                            <div class="form-row ">
+                                <input type="text" name="employee_id" id="employee_id" class="input-text" placeholder="ID" required >
+                            </div>
+                            <div class="form-row ">
+                                <input type="text" name="title" id="title" class="input-text" placeholder="Title" >
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row form-row-1">
+                                    <input type="text" name="first_name" id="first_name" class="input-text" placeholder="First Name" required>
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-row form-row-1">
-                                        <input type="text" name="first_name" id="first_name" class="input-text" placeholder="First Name" required>
-                                    </div>
-                                    <div class="form-row form-row-2">
-                                        <input type="text" name="last_name" id="last_name" class="input-text" placeholder="Last Name" required>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <select name="position">
-                                        <option value="position">Position</option>
-                                        <option value="director">Director</option>
-                                        <option value="manager">Manager</option>
-                                        <option value="employee">Employee</option>
-                                    </select>
-                                    <span class="select-btn">
-                                          <i class="zmdi zmdi-chevron-down"></i>
-                                    </span>
-                                </div>
-                                <div class="form-row">
-                                    <input type="text" name="company" class="company" id="company" placeholder="Company" required>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-row form-row-3">
-                                        <input type="text" name="business" class="business" id="business" placeholder="Business Arena" required>
-                                    </div>
-                                    <div class="form-row form-row-4">
-                                        <select name="employees">
-                                            <option value="employees">Employees</option>
-                                            <option value="trainee">Trainee</option>
-                                            <option value="colleague">Colleague</option>
-                                            <option value="associate">Associate</option>
-                                        </select>
-                                        <span class="select-btn">
-                                              <i class="zmdi zmdi-chevron-down"></i>
-                                        </span>
-                                    </div>
+                                <div class="form-row form-row-2">
+                                    <input type="text" name="last_name" id="last_name" class="input-text" placeholder="Last Name" required>
                                 </div>
                             </div>
-                            <div class="form-right">
-                                <h2>Contact Details</h2>
-                                <div class="form-row">
-                                    <input type="text" name="street" class="street" id="street" placeholder="Street + Nr" required>
+                            <div class="form-row">
+                                <input type="text" name="position" id="position" class="input-text" placeholder="Position" required>
+                            </div>
+                            <div class="form-row">
+                                <select name="Gender">
+                                    <option value="employees">Male</option>
+                                    <option value="trainee">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <label for="birthday">Birthday:</label>
+                                <input type="date" name="birthday" class="birthday" id="birthday" placeholder="Birthday" required>
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="nation" id="nation" class="input-text" placeholder="Nation" required>
+                            </div>
+                        
+                            <div class="form-group">
+                                <div class="form-row form-row-1">
+                                    <input type="text" name="idno" id="idno" class="input-text" placeholder="ID No." required>
                                 </div>
-                                <div class="form-row">
-                                    <input type="text" name="additional" class="additional" id="additional" placeholder="Additional Information" required>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-row form-row-1">
-                                        <input type="text" name="zip" class="zip" id="zip" placeholder="Zip Code" required>
-                                    </div>
-                                    <div class="form-row form-row-2">
-                                        <select name="place">
-                                            <option value="place">Place</option>
-                                            <option value="Street">Street</option>
-                                            <option value="District">District</option>
-                                            <option value="City">City</option>
-                                        </select>
-                                        <span class="select-btn">
-                                              <i class="zmdi zmdi-chevron-down"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <select name="country">
-                                        <option value="country">Country</option>
-                                        <option value="Vietnam">Vietnam</option>
-                                        <option value="Malaysia">Malaysia</option>
-                                        <option value="India">India</option>
-                                    </select>
-                                    <span class="select-btn">
-                                          <i class="zmdi zmdi-chevron-down"></i>
-                                    </span>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-row form-row-1">
-                                        <input type="text" name="code" class="code" id="code" placeholder="Code +" required>
-                                    </div>
-                                    <div class="form-row form-row-2">
-                                        <input type="text" name="phone" class="phone" id="phone" placeholder="Phone Number" required>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Your Email">
-                                </div>
-                                <div class="form-checkbox">
-                                    <label class="container"><p>I do accept the <a href="#" class="text">Terms and Conditions</a> of your site.</p>
-                                          <input type="checkbox" name="checkbox">
-                                          <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="form-row-last">
-                                    <input type="submit" name="register" class="register" value="Register Badge">
+                                <div class="form-row form-row-2">
+                                    <input type="text" name="idtype" id="idtype" class="input-text" placeholder="ID Type" required>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="form-group">
+                                <div class="form-row form-row-3">
+                                    <input type="text" name="team" id="team" class="input-text" placeholder="Team">
+                                </div>
+                                <div class="form-row form-row-4">
+                                    <select name="Type">
+                                        <option value="employees">Employees</option>
+                                        <option value="trainee">Trainee</option>
+                                        <option value="colleague">Visitor</option>
+                                        <option value="associate">Associate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-right">
+                            <h2 >Contact Details</h2>
+                            <div class="form-row">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" class="input-text">
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="contact" class="contact" id="contact" placeholder="Contact No." required>
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="adresss" class="adresss" id="adresss" placeholder="Adresss" required>
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="adcontact" class="adcontact" id="adcontact" placeholder="Adresss Contact" required>
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="overseaadresss" class="overseaadresss" id="overseaadresss" placeholder="Oversea Adresss">
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="ovcontact" class="ovcontact" id="ovcontact" placeholder="Oversea Adresss Contact" >
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="emerseaadresss" class="emerseaadresss" id="emerseaadresss" placeholder="Emergency Adresss" >
+                            </div>
+                            <div class="form-row">
+                                <input type="text" name="emercontact" class="emercontact" id="emercontact" placeholder="Emergency Adresss Contact">
+                            </div>
+                        </div>
+                        <div class="form-right">
+                            <h2 >Image</h2>
+                            <div class="form-row">
+                                <div class="col-sm-3 col-5">
+                                    <label>Profile:</label>
+                                    <input type="file" id="imgprofile" name="imgprofile" accept="image/*" style="border-bottom: 0px;">
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-row">
+                                <div class="col-sm-3 col-5">
+                                    <label>Straight:</label>
+                                    <input type="file" id="imgstraight" name="imgstraight" accept="image/*" style="border-bottom: 0px;">
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-row">
+                                <div class="col-sm-3  col-5">
+                                    <label>Top:</label>
+                                    <input type="file" id="imgtop" name="imgtop" accept="image/*" style="border-bottom: 0px;">
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-row">
+                                <div class="col-sm-3 col-5">
+                                    <label>Bottom:</label>
+                                    <input type="file" id="imgbottom" name="imgbottom" accept="image/*" style="border-bottom: 0px;">
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-row">
+                                <div class="col-sm-3 col-5">
+                                    <label>Left:</label>
+                                    <input type="file" id="imgleft" name="imgleft" accept="image/*" style="border-bottom: 0px;">
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-row">
+                                <div class="col-sm-3 col-5">
+                                    <label>Right:</label>
+                                    <input type="file" id="imgright" name="imgright" accept="image/*" style="border-bottom: 0px;">
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-row-last">
+                                <input type="submit" name="register" class="register" value="Register">
+                            </div>
+                        </div>
+                    </form>
+                </div>
         </div>
     </div>
- </div>
+  </div>
 </div>
 
 
