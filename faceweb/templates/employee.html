@@ -375,18 +375,68 @@
                                                 <label style="font-weight:bold;"></label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                <button type="submit">Submit</button>
+                                                <button type="submit" name="btnform1" >Submit</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade " id="edit" role="tabpanel" aria-labelledby="edit-tab">
-                                    
-                                    <div class="row" style="margin-left:1%;">
-                                        <form class="image" role="form"  method="POST" enctype="multipart/form-data" ></form>
-                                            
-                                        </form>
-                                    </div>      
+                                    <form class="image" role="form"  method="POST" enctype="multipart/form-data" >
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Firstname</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.firstname}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Lastname</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.lastname}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">email</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.email}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">status</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.status}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Type</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.Type}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;"></label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                <button type="submit" name="btnform2" >Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>     
                                 </div>
                             </div>
                         </div>

@@ -81,22 +81,22 @@ def employeePage(request,status_slug,employee_slug):
     form_class = EmployeeForm 
     form_image = ImageForm
     
-    if request.method == 'POST':
-        print(request.POST )
-        if 'imgprofile' or 'imgright' or 'imgleft' or 'imgtop' or 'imgbottom' or 'imgstraight' in request.headers:
-            form_image = form_image(data=request.POST, files=request.FILES,instance=employee)
-            if form_image.is_valid():
-                form_image.save()
-                return redirect('employee_detail',status_slug=status_slug,employee_slug=employee_slug)
-        else:
-            form = form_class(data=request.POST,instance=employee)
-            status=request.POST.getlist('status')
-            status_id =status[0]
-            status = Status.objects.values('slug').get(id=status_id)
-            status_slug = status.get("slug")
-            if form.is_valid():
-                form.save()
-                return redirect('employee_detail',status_slug=status_slug,employee_slug=employee_slug)    
+    if request.method == 'POST' and 'btnform1' in request.POST:
+       
+        form_image = form_image(data=request.POST, files=request.FILES,instance=employee)
+        if form_image.is_valid():
+            form_image.save()
+            return redirect('employee_detail',status_slug=status_slug,employee_slug=employee_slug)
+    
+    elif request.method=='POST' and 'btnform2' in request.POST:
+        form = form_class(data=request.POST,instance=employee)
+        status=request.POST.getlist('status')
+        status_id =status[0]
+        status = Status.objects.values('slug').get(id=status_id)
+        status_slug = status.get("slug")
+        if form.is_valid():
+            form.save()
+            return redirect('employee_detail',status_slug=status_slug,employee_slug=employee_slug)    
     else:
         form_image = form_image(instance=employee)
         form = form_class(instance=employee)
