@@ -1,6 +1,7 @@
 {% extends 'layouts.html' %}
-
 {% block content %}
+{% load crispy_forms_tags %}
+
 <div class="containerprr" style="position: absolute; top: 8.6%; left: 17.3%; height:100%; width:81%;">
     <div class="row" style ="margin-left: 0.1%;">
         <div class="col-12">
@@ -385,6 +386,15 @@
                                         {% csrf_token %}
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Title</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.title}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">Firstname</label>
                                             </div>
                                             <div class="col-md-8 col-6">
@@ -403,16 +413,7 @@
                                         <hr />
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">email</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                {{form.email}}
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">status</label>
+                                                <label style="font-weight:bold;">Status</label>
                                             </div>
                                             <div class="col-md-8 col-6">
                                                 {{form.status}}
@@ -428,6 +429,77 @@
                                             </div>
                                         </div>
                                         <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Email</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.email}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Contact</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.contact}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Address</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.adresss}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Address Contact</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.adcontact}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Oversea Address</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.overseaadresss}}
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Oversea Address Contact</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.ovcontact}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Emergency Address</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.emerseaadresss}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Emergency Address Contact</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{form.emercontact}}
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;"></label>
