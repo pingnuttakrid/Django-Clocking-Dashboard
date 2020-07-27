@@ -9,8 +9,8 @@ from django.contrib import messages
 from django.db.models import F, Max
 import datetime
 from .filters import ClockingFilter
-from .forms import EmployeeForm,ImageForm,RegisterForm 
-
+from .forms import EmployeeForm,ImageForm
+import os
 # Create your views here.
 class ClockingCreateAPIView(CreateAPIView):
     serializer_class = ClockingSerializer
@@ -120,17 +120,99 @@ def employeeTable(request,slug):
 
 
 
-
+@login_required(login_url='home')
 def register(request):
     if request.method == "POST":  
-        form = RegisterForm(request.POST)  
-        if form.is_valid():  
-            try:  
-                form.save()  
-                return redirect('employee_by_status')  
-            except:  
-                pass  
-    else:  
-        form = RegisterForm()    
+        employee_id = request.POST["employee_id"]
+        title = request.POST["title"]
+        firstname = request.POST["first_name"]
+        lastname = request.POST["last_name"]
+        email = request.POST["email"]
+        gender = request.POST["gender"]
+        nation = request.POST["nation"]
+        Type = request.POST["Type"]
+        idno = request.POST["idno"]
+        idtype = request.POST["idtype"]
+        birthday = request.POST["birthday"]
+        contact = request.POST["contact"]
+        addresss = request.POST["adresss"]
+        adcontact = request.POST["adcontact"]
+        overseaadresss = request.POST["overseaadresss"]
+        ovcontact = request.POST["ovcontact"]
+        emerseaadresss = request.POST["emerseaadresss"]
+        emercontact = request.POST["emercontact"]
+        
+        imgprofile = request.FILES["imgprofile"]
 
-    return render(request,'register.html',{'form':form})
+        user_folder = 'static/media/employee/' + str(employee_id)
+        if not os.path.exists(user_folder):
+               os.mkdir(user_folder)
+       
+        imgprofile_extension = '{}-profiles.JPG'.format(employee_id)
+        imgprofile_save_path = "{}/{}".format(user_folder, imgprofile_extension)
+        with open(imgprofile_save_path, 'wb+') as f:
+            for chunk in imgprofile.chunks():
+                f.write(chunk)
+        
+        imgprofile_path = 'employee/{}/{}'.format(employee_id,imgprofile_extension)
+        
+        imgstraight = request.FILES["imgstraight"]
+       
+        imgstraight_extension = '{}-straight.JPG'.format(employee_id)
+        imgstraight_save_path = "{}/{}".format(user_folder,imgstraight_extension)
+        with open(imgstraight_save_path, 'wb+') as f:
+            for chunk in imgstraight.chunks():
+                f.write(chunk)
+                
+        imgstraight_path = 'employee/{}/{}'.format(employee_id,imgstraight_extension)
+        
+        imgtop = request.FILES["imgtop"]
+        
+        imgtop_extension = '{}-top.JPG'.format(employee_id)
+        imgtop_save_path = "{}/{}".format(user_folder,imgtop_extension)
+        with open(imgtop_save_path, 'wb+') as f:
+            for chunk in imgtop.chunks():
+                f.write(chunk)
+        
+        imgtop_path = 'employee/{}/{}'.format(employee_id,imgtop_extension)
+        
+        imgbottom = request.FILES["imgbottom"]
+        
+        imgbottom_extension = '{}-bottom.JPG'.format(employee_id)
+        imgbottom_save_path = "{}/{}".format(user_folder,imgbottom_extension)
+        with open(imgbottom_save_path, 'wb+') as f:
+            for chunk in imgbottom.chunks():
+                f.write(chunk)
+                
+        imgbottom_path = 'employee/{}/{}'.format(employee_id,imgbottom_extension)        
+        
+        imgleft = request.FILES["imgleft"]
+
+        imgleft_extension = '{}-left.JPG'.format(employee_id)
+        imgleft_save_path = "{}/{}".format(user_folder,imgleft_extension)
+        with open(imgleft_save_path, 'wb+') as f:
+            for chunk in imgleft.chunks():
+                f.write(chunk)
+        
+        imgleft_path = 'employee/{}/{}'.format(employee_id,imgleft_extension) 
+        
+        imgright = request.FILES["imgright"]
+        
+        imgright_extension = '{}-right.JPG'.format(employee_id)
+        imgright_save_path = "{}/{}".format(user_folder,imgright_extension)
+        with open(imgright_save_path, 'wb+') as f:
+            for chunk in imgright.chunks():
+                f.write(chunk)
+       
+        imgright_path = 'employee/{}/{}'.format(employee_id,imgright_extension) 
+        
+        slug = firstname+lastname
+        status = "1"
+        
+        employee = Employee(employee_id=employee_id,title=title,firstname=firstname,lastname=lastname,slug=slug,status_id=status,email=email,gender=gender,nation=nation,Type=Type,idno=idno,idtype=idtype,birthday=birthday,contact=contact,adresss=addresss,adcontact=adcontact,overseaadresss=overseaadresss,ovcontact=ovcontact,emerseaadresss=emerseaadresss,emercontact=emercontact,imgprofile=imgprofile_path,imgstraight=imgstraight_path,imgtop=imgtop_path,imgbottom=imgbottom_path,imgleft=imgleft_path,imgright=imgright_path)
+        employee.save()
+          
+        return redirect('index')  
+               
+
+    return render(request,'register.html')

@@ -12,7 +12,7 @@
         <div class="card-body" style="width:100%;">
                 
             <div class="form-v10-content">
-                    <form class="form-detail" action="#" method="post" id="myform">
+                    <form class="form-detail" method="POST" id="myform" role="form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-left">
                             <h2 style="color:#212529;">General Infomation</h2>
@@ -34,14 +34,14 @@
                                 <input type="text" name="position" id="position" class="input-text" placeholder="Position" required>
                             </div>
                             <div class="form-row">
-                                <select name="Gender">
+                                <select name="gender">
                                     <option value="employees">Male</option>
                                     <option value="trainee">Female</option>
                                 </select>
                             </div>
                             <div class="form-row">
-                                <label for="birthday">Birthday:</label>
-                                <input type="date" name="birthday" class="birthday" id="birthday" placeholder="Birthday" required>
+                                <label for="birthday"  class="col-form-label"  style="font-family: 'Montserrat', sans-serif;font-size: 16px; color: #666" ></label>Birthday:</label>
+                                <input type="date" name="birthday" class="form-control col-sm-10" id="birthday" placeholder="Birthday" required>
                             </div>
                             <div class="form-row">
                                 <input type="text" name="nation" id="nation" class="input-text" placeholder="Nation" required>
@@ -72,14 +72,14 @@
                         <div class="form-right">
                             <h2 >Contact Details</h2>
                             <div class="form-row">
-                                <label for="email">Email:</label>
-                                <input type="email" name="email" id="email" class="input-text">
+                                <label for="email"class="col-form-label" style="font-family: 'Montserrat', sans-serif;font-size: 16px; color: #666;">Email:</label>
+                                <input type="email" name="email" id="email" class="input-text form-control col-sm-10">
                             </div>
                             <div class="form-row">
                                 <input type="text" name="contact" class="contact" id="contact" placeholder="Contact No." required>
                             </div>
                             <div class="form-row">
-                                <input type="text" name="adresss" class="adresss" id="adresss" placeholder="Adresss" required>
+                                <input type="text" name="adresss" class="adresss" id="adresss" placeholder="Adress" required>
                             </div>
                             <div class="form-row">
                                 <input type="text" name="adcontact" class="adcontact" id="adcontact" placeholder="Adresss Contact" required>
@@ -102,7 +102,7 @@
                             <div class="form-row">
                                 <div class="col-sm-3 col-5">
                                     <label>Profile:</label>
-                                    <input type="file" id="imgprofile" name="imgprofile" accept="image/*" style="border-bottom: 0px;">
+                                    <input type="file" id="imgprofile" name="imgprofile" accept="image/JPG" style="border-bottom: 0px;">
                                 </div>
                             </div>
                             <hr />
