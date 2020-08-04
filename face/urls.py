@@ -32,6 +32,7 @@ urlpatterns = [
     path('employees/',views.employees,name="employees"),
     path('status/<slug:status_slug>',views.employees,name='employee_by_status'),
     path('timesheet/',views.timesheet,name="timesheet"),
+    path('timeline/',views.timeline,name="timeline"),
     path('employee/<slug:status_slug>/<slug:employee_slug>',views.employeePage,name='employee_detail'),
     path('employeeTable/<slug:slug>',views.employeeTable,name='employee_Table'),
        url(r'^rest/', include('faceweb.urls')),

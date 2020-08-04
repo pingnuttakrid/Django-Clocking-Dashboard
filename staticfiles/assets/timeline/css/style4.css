@@ -1,0 +1,479 @@
+/**======================================================================
+=========================================================================
+Template Name: Datta Able Admin Template
+Author: Codedthemes
+supports: https://codedthemes.support-hub.io/
+File: style.css
+=========================================================================
+=========================================================================
+  == Table of Contents==
+	- Generic classes
+		-	Margin, Padding, Font class, text align, position, floating, overflow, background class, text color, display class, boarder class
+	- Theme Elements
+		-	Accordion, Button, tabs, typography, buttons, box shadow, Lable & Badges, Alert, Pagination, Breadcumb, Cards, Collapse,
+        -   Carousel, Grid, Progress, Model, tooltip, popover, Datepicker, Gridstack, lightbox, notification, Nestable, pnotify, rating,
+        -   Rangeslider, Slider, Syntax Highlighter, Tour, Treeview, Toolbar, Session Timeout, Session idle Timeout, offline, Animation
+    - Forms
+        -   Forms Elements, Advance Form Control, Validation, Masking, Wizard, Picker, Select
+	- Pages
+		-   Chat, authentication, Maintenance, Maps, Landingpage messages, task, Todo, Notes, Charts, Icons, Gallery, Editors,
+        -   Invoice, Full Calender, File Upload,
+=================================================================================
+=================================================================================== */
+/*
+    description Of variables for build for theme layouts
+        1) menu-caption-color
+            List of color for sidebar menu caption
+
+        2) brand-background
+            List of color for logo background
+
+        3) header-dark-background
+            List of color for Dark Header
+
+        4) header-light-background
+            List of color for light Header
+
+        5) menu-dark-background
+            List of color for Dark sidebar menu
+
+        6) menu-light-background
+            List of color for light sidebar menu
+
+        7) menu-active-color
+            List of color for Active item highliter
+
+        8) menu-icon-color
+            List of color for sidebar menu items icon colors
+*/
+/**  =====================
+     Google Font
+==========================  **/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600");
+@import url("../plugins/bootstrap/css/bootstrap.min.css");
+@import url("../fonts/feather/css/feather.css");
+@import url("../plugins/jquery-scrollbar/css/jquery.scrollbar.min.css");
+@import url("../fonts/datta/datta-icon.css");
+/**  =====================
+      Custom css start
+==========================  **/
+
+
+.card {
+  border-radius: 0;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+          box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+  border: none;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.card .card-header {
+  background-color: transparent;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 20px 25px;
+  position: relative;
+}
+.card .card-header h5 {
+  margin-bottom: 0;
+  color: #000;
+  font-size: 17px;
+  font-weight: 400;
+  display: inline-block;
+  margin-right: 10px;
+  line-height: 1.1;
+  position: relative;
+}
+.card .card-header h5:after {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 0;
+  width: 4px;
+  height: 20px;
+}
+.card .card-header.borderless {
+  border-bottom: none;
+}
+.card .card-header.borderless h5:after {
+  display: none;
+}
+.card .card-header .card-header-right {
+  right: 10px;
+  top: 10px;
+  display: inline-block;
+  float: right;
+  padding: 0;
+  position: absolute;
+}
+@media only screen and (max-width: 575px) {
+  .card .card-header .card-header-right {
+    display: none;
+  }
+}
+
+.card .card-footer {
+  border-top: 1px solid #f1f1f1;
+  background: transparent;
+  padding: 25px;
+}
+.card .card-block,
+.card .card-body {
+  padding: 30px 25px;
+}
+.card.card-load {
+  position: relative;
+  overflow: hidden;
+}
+.card.card-load .card-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 999;
+}
+.card.card-load .card-loader i {
+  margin: 0 auto;
+  color: #04a9f5;
+  font-size: 24px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.card.full-card {
+  z-index: 99999;
+  border-radius: 0;
+}
+
+
+
+
+.card .animated {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  border: 5px solid #fff;
+  margin-bottom: 30px;
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+
+.card-border-c-blue {
+  border-top: 4px solid #04a9f5;
+}
+
+.card-border-c-red {
+  border-top: 4px solid #f44236;
+}
+
+.card-border-c-green {
+  border-top: 4px solid #1de9b6;
+}
+
+.card-border-c-yellow {
+  border-top: 4px solid #f4c22b;
+}
+
+.card-border-c-purple {
+  border-top: 4px solid #a389d4;
+}
+
+
+.table-card .row-table {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.table td,
+.table th {
+  border-top: 1px solid #eaeaea;
+  white-space: nowrap;
+  padding: 1.05rem 0.75rem;
+}
+.table thead th {
+  border-bottom: 1px solid #eaeaea;
+}
+.table tbody + tbody {
+  border-top: 2px solid #eaeaea;
+}
+
+/* Border versions */
+.table-bordered {
+  border: 1px solid #eaeaea;
+}
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid #eaeaea;
+}
+
+/* Zebra-striping */
+.table-striped tbody tr:nth-of-type(2n+1) {
+  background-color: rgba(4, 169, 245, 0.05);
+}
+
+/* Hover effect */
+.table-hover tbody tr:hover {
+  background-color: rgba(4, 169, 245, 0.05);
+}
+
+/* Table backgrounds */
+.table .thead-dark th {
+  color: #fff;
+  background-color: #37474f;
+  border-color: #222c31;
+}
+
+.table-dark {
+  color: #fff;
+  background-color: #37474f;
+}
+.table-dark td,
+.table-dark th,
+.table-dark thead th {
+  border-color: #222c31;
+}
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #334249;
+}
+.table-dark.table-hover tbody tr:hover {
+  background-color: #2d3940;
+}
+
+/* fixed header position */
+table.dataTable.fixedHeader-floating {
+  top: 0 !important;
+}
+@media screen and (max-width: 992px) {
+  table.dataTable.fixedHeader-floating {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .fixedHeader-locked {
+    display: none !important;
+  }
+}
+
+
+.User-Activity .table td,
+.user-list .table td {
+  vertical-align: middle;
+}
+.User-Activity .table thead th,
+.user-list .table thead th {
+  border: 0;
+}
+
+.Application-list .table td,
+.code-table .table td {
+  vertical-align: middle;
+}
+.Application-list .table .label,
+.code-table .table .label {
+  border-radius: 15px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+.Application-list thead th,
+.code-table thead th {
+  border: 0;
+}
+
+.Recent-Users .table tr:first-child td,
+.User-Lists .table tr:first-child td {
+  border-top: 0;
+}
+.Recent-Users .table td,
+.User-Lists .table td {
+  vertical-align: middle;
+}
+.Recent-Users .table .label,
+.User-Lists .table .label {
+  border-radius: 15px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.datepicker table tr td.active.active, .datepicker table tr td.active.highlighted.active, .datepicker table tr td.active.highlighted:active,
+.datepicker table tr td.active:active, .datepicker table tr td.highlighted,
+.datepicker table tr td.today, .datepicker table tr td.day:hover, .datepicker table tr td.focused, .datepicker .datepicker-switch:hover, .datepicker .next:hover, .datepicker .prev:hover, .datepicker tfoot tr th:hover {
+  background-color: #333f54;
+  color: #fff;
+}
+
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover,
+.datepicker table tr td.new,
+.datepicker table tr td.old {
+  color: #ffffff94;
+}
+ 
+.table td,
+.table th {
+  border-top: 1px solid #eaeaea;
+  white-space: nowrap;
+  padding: 1.05rem 0.75rem;
+}
+.table thead th {
+  border-bottom: 1px solid #eaeaea;
+}
+.table tbody + tbody {
+  border-top: 2px solid #eaeaea;
+}
+
+/* Border versions */
+.table-bordered {
+  border: 1px solid #eaeaea;
+}
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid #eaeaea;
+}
+
+/* Zebra-striping */
+.table-striped tbody tr:nth-of-type(2n+1) {
+  background-color: rgba(4, 169, 245, 0.05);
+}
+
+/* Hover effect */
+.table-hover tbody tr:hover {
+  background-color: rgba(4, 169, 245, 0.05);
+}
+
+/* Table backgrounds */
+.table .thead-dark th {
+  color: #fff;
+  background-color: #37474f;
+  border-color: #222c31;
+}
+
+.table-dark {
+  color: #fff;
+  background-color: #37474f;
+}
+.table-dark td,
+.table-dark th,
+.table-dark thead th {
+  border-color: #222c31;
+}
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #334249;
+}
+.table-dark.table-hover tbody tr:hover {
+  background-color: #2d3940;
+}
+
+/* fixed header position */
+table.dataTable.fixedHeader-floating {
+  top: 0 !important;
+}
+@media screen and (max-width: 992px) {
+  table.dataTable.fixedHeader-floating {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .fixedHeader-locked {
+    display: none !important;
+  }
+}
+/**  =====================
+      Foo-table css start
+==========================  **/
+.footable .pagination > .active > a,
+.footable .pagination > .active > span {
+  background-color: #04a9f5;
+  border-color: #04a9f5;
+}
+.footable .pagination > .active > a:focus, .footable .pagination > .active > a:hover,
+.footable .pagination > .active > span:focus,
+.footable .pagination > .active > span:hover {
+  background-color: #04a9f5;
+  border-color: #04a9f5;
+}
+.footable .pagination > li > a,
+.footable .pagination > li > span {
+  color: #222;
+}
+
+.footable-details.table,
+.footable.table {
+  margin-bottom: 0;
+}
+
+table.footable > tfoot > tr.footable-paging > td > span.label {
+  margin-bottom: 0;
+}
+table.footable-paging-center > tfoot > tr.footable-paging > td {
+  padding-bottom: 0;
+}
+
+.table-columned > tbody > tr > td {
+  border: 0;
+  border-left: 1px solid #eaeaea;
+}
+.table-columned > tbody > tr > th {
+  border: 0;
+}
+
+.tab-content {
+  padding: 35px 30px;
+  background: #fff;
+  -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+          box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+}
+.tab-content > .tab-pane {
+  display: none;
+}
+.tab-content > .active {
+  display: block;
+}
+
+.morris-hover {
+  position:absolute;
+  z-index:1000;
+}
+
+.morris-hover.morris-default-style {     border-radius:10px;
+  padding:6px;
+  color:#666;
+  background:rgba(255, 255, 255, 0.8);
+  border:solid 2px rgba(230, 230, 230, 0.8);
+  font-family:sans-serif;
+  font-size:12px;
+  text-align:center;
+}
+
+.morris-hover.morris-default-style .morris-hover-row-label {
+  font-weight:bold;
+  margin:0.25em 0;
+}
+
+.morris-hover.morris-default-style .morris-hover-point {
+  white-space:nowrap;
+  margin:0.1em 0;
+}
+
+svg { width: 100%; }
+

@@ -216,3 +216,15 @@ def register(request):
                
 
     return render(request,'register.html')
+
+@login_required(login_url='home')
+def timeline(request):
+     
+     now = datetime.datetime.now()
+     
+     year = now.year
+     day = now.strftime("%A")
+     date = now.strftime("%d")
+     month = now.strftime("%B")
+     
+     return render(request,'timeline.html',{'year':year,'day':day,'date':date,'month':month})

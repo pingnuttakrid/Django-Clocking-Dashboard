@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*','https://glacial-gorge-87635.herokuapp.com/']
 
 
-STATICFILES_DIRS=[os.path.join(BASE_DIR,'static2')]
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'staticfiles')]
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL='/media/'
@@ -83,7 +83,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'face.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
