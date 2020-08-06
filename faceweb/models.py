@@ -61,4 +61,8 @@ class Clocking(models.Model):
 
 class Image_Clocking(models.Model):
 	model_pic = models.ImageField(upload_to ='clocking',null=True,default ='none/no-img.jpg')
+    
+class Threshold_Clocking(models.Model):
+    time = models.TimeField()
 	
+    
