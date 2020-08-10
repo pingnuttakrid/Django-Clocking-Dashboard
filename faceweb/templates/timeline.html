@@ -121,6 +121,13 @@
                             parseTime: false,
                         });
                         }
+                        <script> 
+                            $(document).ready(function(){
+                            setInterval(function(){
+                                  $("#line-chart").load(location.href + " #line-chart" );
+                            }, 3000);
+                            });
+                        </script>
                 </script>
             </div>
         </div>
@@ -163,7 +170,14 @@
                             formatter: function (value) { return (value/"{{total}}" *100) + '%'; }
                             });
                         }
-                    </script>    
+                    </script>
+                    <script> 
+                            $(document).ready(function(){
+                            setInterval(function(){
+                                  $("#donut-chart").load(location.href + " #donut-chart" );
+                            }, 3000);
+                            });
+                    </script>
             </div>
         </div>
     </div>
