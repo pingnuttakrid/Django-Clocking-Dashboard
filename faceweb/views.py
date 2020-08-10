@@ -13,6 +13,7 @@ import os
 from pusher import Pusher
 import datetime
 from datetime import datetime as dt
+
 pusher = Pusher(
   app_id='1050071',
   key='a47dd25cb99c85ac67dc',
@@ -33,6 +34,14 @@ class ImageCreateAPIView(CreateAPIView):
 	serializer_class = imageSerializer
 	queryset = Image_Clocking.objects.all()
 
+
+def pusher_authentication(request):
+        channel = request.GET.get('channel_name', None)
+        socket_id = request.GET.get('socket_id', None)
+        auth = pusher.authenticate(
+          channel = channel,
+          socket_id = socket_id
+        )
 
 def home(request):
     if request.method=='POST':
@@ -282,7 +291,7 @@ def timeline(request):
      month = now.strftime("%B")
      
      clocking = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).order_by('-time')
-     late = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time)
+     late = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).order_by('-time')
      absence = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date)
      
      
@@ -291,5 +300,7 @@ def timeline(request):
      absence_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
      
      total = clocking_num+absence_num+late_num
-      
+     
+     
+     
      return render(request,'timeline.html',{'year':year,'day':day,'date':date,'month':month,'clockings':clocking,'lates':late,'absences':absence,'clocking_num':clocking_num,'late_num':late_num,'absence_num':absence_num,'graphs':graphs,'total':total})

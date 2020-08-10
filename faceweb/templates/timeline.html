@@ -122,6 +122,13 @@
                         });
                         }
                 </script>
+                <script> 
+                    $(document).ready(function(){
+                    setInterval(function(){
+                          $("#line-chart").load(window.location.href + "#line-chart" );
+                    }, 3000);
+                    });
+                </script>
             </div>
         </div>
     </div>
@@ -164,6 +171,14 @@
                             });
                         }
                     </script>
+                    <script> 
+                        $(document).ready(function(){
+                        setInterval(function(){
+                              $("#donut-chart").load(window.location.href + " #donut-chart" );
+                        }, 3000);
+                        });
+                    </script>
+                        
             </div>
         </div>
     </div>
@@ -280,7 +295,7 @@
                         }
                       }
                     }
-                </script> 
+                </script>
             </div>
             <div class="tab-pane fade" id="late" role="tabpanel" aria-labelledby="late-tab">
                 <table class="table table-hover" id="myTable2" >
@@ -386,9 +401,9 @@
                         <tr>
                             <th onclick="sortTable(0)">ID</th>
                             <th></th>
-                            <th onclick="sortTable(1)">Name</th>
-                            <th onclick="sortTable(2)">Type</th>
-                            <th onclick="sortTable(3)">Date</th>
+                            <th onclick="sortTable(2)">Name</th>
+                            <th onclick="sortTable(3)">Type</th>
+                            <th onclick="sortTable(4)">Date</th>
                         </tr>
                     </thead>
                     {% for absence in absences %}
@@ -468,7 +483,7 @@
                         }
                       }
                     }
-                </script> 
+                </script>
             </div>
             <div class="tab-pane fade" id="wfh" role="tabpanel" aria-labelledby="wfh-tab">
                 <table class="table table-hover" id="myTable" >
@@ -492,6 +507,7 @@
     </div>
 
 </div>
+
 
 
 
