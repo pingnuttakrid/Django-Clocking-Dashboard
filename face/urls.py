@@ -20,16 +20,16 @@ from django.conf.urls.static import static
 from django.conf import settings
 from faceweb import views
 import os
-from django.contrib.auth.models import User
-from faceweb.models import Employee
+#from django.contrib.auth.models import User
+#from faceweb.models import Employee
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-user=User.objects.all().latest('last_login')
+'''user=User.objects.all().latest('last_login')
 email = user.email
 profile = Employee.objects.all().filter(email=email)[0]
 status_slug = profile.status.slug
-slug = profile.slug
+slug = profile.slug'''
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,7 +42,7 @@ urlpatterns = [
     path('timesheet/',views.timesheet,name="timesheet"),
     path('timeline/',views.timeline,name="timeline"),
     path('employee/<slug:status_slug>/<slug:employee_slug>',views.employeePage,name='employee_detail'),
-    path('employee/{}/{}'.format(status_slug,slug),views.employeePage,name='employee_user'),
+    #path('employee/{}/{}'.format(status_slug,slug),views.employeePage,name='employee_user'),
     path('employeeTable/<slug:slug>',views.employeeTable,name='employee_Table'),
        url(r'^rest/', include('faceweb.urls')),
        url(r'^image/', include('faceweb.urls')),	
