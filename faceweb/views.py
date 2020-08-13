@@ -13,7 +13,7 @@ import os
 import datetime
 from datetime import datetime as dt
 from django.contrib.auth.models import User
-
+import csv, io
 
 
 
@@ -91,15 +91,65 @@ def index(request):
 
 @login_required(login_url='home')
 def employees(request,status_slug=None):
+    
     employees = None
     status_page = None
+    
     if status_slug != None:
          status_page = get_object_or_404(Status,slug=status_slug)
          status_de = Status.objects.all().filter(name=status_page)
          employees = Employee.objects.all().filter(status=status_page)
     else:
         employees = Employee.objects.all().filter()
-    
+        
+    if request.method == "POST" and 'upload'in request.POST:
+      
+        csv_file = request.FILES['file']
+        
+        print(csv_file.name)
+        
+        if not csv_file.name.endswith('.csv'):
+            messages.error(request, 'THIS IS NOT A CSV FILE')
+            return render(request,'employees.html',{'employees':employees,'status':status_page,'status_detail':status_de})
+         
+        data_set = csv_file.read().decode('UTF-8')
+        io_string = io.StringIO(data_set)
+        next(io_string)
+        for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+            firstname=column[2]
+            lastname=column[3]
+            status_id = 1
+            path =  'none/no-img.jpg'
+            _, created = Employee.objects.update_or_create(
+            employee_id=column[0],
+            title=column[1],
+            firstname=firstname,
+            lastname=lastname,
+            slug=firstname+lastname,
+            status_id=status_id,
+            email=column[4],
+            gender=column[5],
+            nation=column[6],
+            Type=column[7],
+            idno=column[8],
+            idtype=column[9],
+            birthday=column[10],
+            contact=column[11],
+            adresss=column[12],
+            adcontact=column[13],
+            overseaadresss=column[14],
+            ovcontact=column[15],
+            emerseaadresss=column[16],
+            emercontact=column[17],
+            imgprofile=path,
+            imgstraight=path,
+            imgtop=path,
+            imgbottom=path,
+            imgleft=path,
+            imgright=path
+            )
+       
+            
     return render(request,'employees.html',{'employees':employees,'status':status_page,'status_detail':status_de})
 
 
