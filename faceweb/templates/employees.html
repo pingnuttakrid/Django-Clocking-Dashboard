@@ -2,15 +2,18 @@
 
 {% block content %}
 {% load static %}
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; height: 29.5%; width:82.65%;background-color: #f5f7f9; margin-left:3.9%;">
-  <h3 class="mb-0" style="color:#064190;margin-top:7%; margin-left:6%;">All Employee</h3>
-  <p style="margin-left: 6.3%; margin-top:0.7%;">View a list of all employees that have already joined the company.</p>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; height: 25%; width:82%;background-color: #f5f7f9; margin-left:4.5%;">
+  {% for status in status_detail %}
+  <h3 class="mb-0" style="color:#064190;margin-top:7.5%; margin-left:3%;">{{status.name}}</h3>
+  <p style="margin-left: 3%; margin-top:0.7%;">{{status.description}}</p>
+  {% endfor %}
 </div>
-<div class="containerem" style="margin-left:1.2%;">
-    <div class="row my-3" >     
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; height: 100%; width:82.5%; margin-left:3.9%; margin-top: 12%;" >
+  <input id="search" type="search" placeholder="Search.." class="form-control" style="width: 22.5%; margin-left:76.5%; margin-top: 2%;">
+    <div class="row my-3" id ="mydiv" style="margin-right: 1%;" >     
     {% for employee in employees %}
-    <div class="col-lg-3 col-md-6 mb-4" >
-      <div class="card-container" style="width: 103%; margin-left: 1.5%; margin-top:3%;">
+    <div class="col-lg-3 col-md-6 mb-4" style="margin-top: -0.5%; padding-left: 5px; padding-right: 5px;" >
+      <div class="card-container" style="width: 87%; margin-left:-15%; margin-top:3%;">
         <img class="round" src="{{employee.imgprofile.url}}"  style="width: 127px; height: 128px" alt="user" />
         <h5 class="card-title" style="color: white; margin-top:7px; margin-left:5px;"><a href="{{employee.get_url}}">{{employee.firstname}} {{employee.lastname}}</a></h5>
         <h6 style="color: white; margin-top:9px; text-align: left ;margin-left:5px ;">Position</h6>
@@ -22,14 +25,23 @@
       </div>
     </div>
     {% endfor %}
-      
-    
     
 
 
     </div>
 </div>
 
-
-
 {% endblock %}
+
+{% block javascripts %}
+<script>
+  $(document).ready(function(){
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $(".card-container").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+{% endblock javascripts %}

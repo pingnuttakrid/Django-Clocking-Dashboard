@@ -33,7 +33,12 @@
                         <td>{{clocking.date}}</td>
                         <td>{{clocking.time}}</td>
                         <td>{{clocking.door}}</td>
+                        {% if clocking.temp > theshold_temp %}
+                        <td style="color: red;">{{clocking.temp}}</td>
+                        {% else %}
                         <td>{{clocking.temp}}</td>
+                        {% endif%}
+                        
                         {% ifequal clocking.date date %}
                         <td>Yes</td>
                         {% else %}
@@ -52,10 +57,10 @@
     <div class="container" style="width: 100%; margin-top:0%; margin-left:0%;">
         
         <div class="row">
-            <div class="form-group" style="margin-left: 1.5%; width: 100%;">
+            <div class="form-group" style="margin-left: 1.5%; width: 100%; margin-top: -1%;">
                  <h5 style="height:100%;">Filters</h5>
             </div>
-            <div class="form-group" style="margin-left: 1.5%;">
+            <div class="form-group" style="margin-left: 1.5%; margin-top: -5.5%;">
                 {{filter.form.door.label_tag}}
                 {% render_field filter.form.door class="form-control" %}
             </div>   
@@ -83,6 +88,10 @@
         </div>
     </div>
   </form>
+    
+{% endblock %}
+
+{% block javascripts %}
 
 <script src="{% static 'assets/jquery/jquery-3.3.1.min.js'%}"></script>
 <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.js'%}"></script>
@@ -104,8 +113,4 @@
 <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
 
-    
-
-{% endblock %}
-
-
+{% endblock javascripts %}

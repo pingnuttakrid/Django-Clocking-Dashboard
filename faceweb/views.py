@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .serializers import ClockingSerializer,imageSerializer
 from rest_framework.generics import (CreateAPIView)
-from faceweb.models import Clocking,Image_Clocking,Employee,Status,Threshold_Clocking
+from faceweb.models import Clocking,Image_Clocking,Employee,Status,Threshold_Clocking,Threshold_Temperature
 from django.contrib.auth import login , authenticate,logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -10,17 +10,10 @@ from django.db.models import F, Max
 from .filters import ClockingFilter
 from .forms import EmployeeForm,ImageForm
 import os
-from pusher import Pusher
 import datetime
 from datetime import datetime as dt
+from django.contrib.auth.models import User
 
-pusher = Pusher(
-  app_id='1050071',
-  key='a47dd25cb99c85ac67dc',
-  secret='f3ab40b1368dea951202',
-  cluster='ap1',
-  ssl=True
-)
 
 
 
@@ -34,14 +27,6 @@ class ImageCreateAPIView(CreateAPIView):
 	serializer_class = imageSerializer
 	queryset = Image_Clocking.objects.all()
 
-
-def pusher_authentication(request):
-        channel = request.GET.get('channel_name', None)
-        socket_id = request.GET.get('socket_id', None)
-        auth = pusher.authenticate(
-          channel = channel,
-          socket_id = socket_id
-        )
 
 def home(request):
     if request.method=='POST':
@@ -66,7 +51,42 @@ def signout(request):
 
 @login_required(login_url='home')
 def index(request):
-    return render(request,'index.html')
+    
+    if request.method == 'POST' and 'submitform1' in request.POST:
+        time = request.POST["appt"]
+        time = time+":00"
+        time = Threshold_Clocking(time=time)
+        time.save()
+        
+    elif request.method == 'POST' and 'submitform2' in request.POST:
+        temp = request.POST["appt2"]
+        temp = Threshold_Temperature(temp=temp)
+        temp.save()
+    
+    now = dt.now()
+    year = now.year
+    day = now.strftime("%A")
+    date = now.strftime("%d")
+    month = now.strftime("%B")
+    
+    current_date = now.date()
+    
+    theshold_time = Threshold_Clocking.objects.latest('id')
+    theshold_time = theshold_time.time
+    
+    theshold_temp = Threshold_Temperature.objects.latest('id')
+    theshold_temp = theshold_temp.temp
+    
+    clocking_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).count()
+    late_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).count()
+    absence_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+    
+    user=User.objects.all().latest('last_login')
+    email = user.email
+    profile = Employee.objects.all().filter(email=email)[0]
+    
+    
+    return render(request,'index.html',{'year':year,'day':day,'date':date,'month':month,'clocking_num':clocking_num,'late_num':late_num,'absence_num':absence_num,'theshold_time':theshold_time,'theshold_temp':theshold_temp,'profile':profile})
 
 
 @login_required(login_url='home')
@@ -75,11 +95,12 @@ def employees(request,status_slug=None):
     status_page = None
     if status_slug != None:
          status_page = get_object_or_404(Status,slug=status_slug)
+         status_de = Status.objects.all().filter(name=status_page)
          employees = Employee.objects.all().filter(status=status_page)
     else:
         employees = Employee.objects.all().filter()
     
-    return render(request,'employees.html',{'employees':employees,'status':status_page})
+    return render(request,'employees.html',{'employees':employees,'status':status_page,'status_detail':status_de})
 
 
 @login_required(login_url='home')
@@ -90,7 +111,10 @@ def timesheet(request):
     clocking_filter = ClockingFilter(request.GET,queryset=clocking)
     clocking = clocking_filter.qs
     
-    return render(request,'timesheet.html',{'clockings':clocking,'date':date,'filter':clocking_filter})
+    theshold_temp = Threshold_Temperature.objects.latest('id')
+    theshold_temp = theshold_temp.temp
+    
+    return render(request,'timesheet.html',{'clockings':clocking,'date':date,'filter':clocking_filter,'theshold_temp':theshold_temp})
 
 
 @login_required(login_url='home')
@@ -284,7 +308,6 @@ def timeline(request):
      
      
      
-     clocking = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time)
      year = now.year
      day = now.strftime("%A")
      date = now.strftime("%d")

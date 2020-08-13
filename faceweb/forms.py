@@ -1,4 +1,4 @@
-from faceweb.models import Employee,Threshold_Clocking
+from faceweb.models import Employee
 from django import forms
 
 class EmployeeForm(forms.ModelForm):

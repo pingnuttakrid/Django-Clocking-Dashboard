@@ -1,7 +1,127 @@
 {% extends 'layouts.html' %}
-{% block content%}
-<div class="container my-4">
-        
-</div>
+{% load static %}
 
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/timeline/fonts/fontawesome/css/fontawesome-all.min.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/timeline/plugins/animation/css/animate.min.css'%}">
+<link rel="stylesheet" type="text/css"  href="{% static 'assets/timeline/css/style4.css'%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
+{% endblock stylesheets %}
+{% block content%}
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; height:40%; width:82.5%;background-color:#f5f7f9; margin-left:3.9%;">
+    <i class="fas fa-user-circle" style="color:#064190; margin-top:11%; margin-left:12%; font-size: 110px;"></i>
+    <h4 style="margin-left:22.5%; margin-top:-8.5%;">{{profile.firstname}} {{profile.lastname}}</a></h4>
+    <p style="margin-left:22.5%;">administrator</p>
+    <p style="margin-left:22.5%;margin-top: -0.5%;">{{profile.email}}</p>
+    <img  src="{% static "images/coworking.png"%}"  style="width: 25%;height:57%; margin-left: 62%; margin-top: -16%;" />
+</div>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; height:42%; width:83%; margin-left:3.3%; margin-top: 19.8%;">
+    <h4 class="mb-0" style="margin-top:2.5%; margin-left:3.5%;">{{day}} {{date}} {{month}} {{year}}</h4>
+
+    
+    <div class="card" style="margin-top: 2.75%; margin-left: 3.5%; width: 29%; height: 25%;">
+        <div class="card-block" style="margin-top : -4.7%;">
+            <div class="row d-flex align-items-center">
+                <div class="col-auto">
+                    <i class="fa fa-check-square-o" style="font-size: 30px; color:#33adff;"></i>
+                </div>
+                <div class="col">
+                    <h5 class="f-w-300">{{clocking_num}}</h5>
+                    <span class="d-block" style="margin-top: -2%;color:#33adff">Clocking</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card" style="margin-top:-6.23%; margin-left:35%; width: 29%; height: 25%;">
+        <div class="card-block" style="margin-top : -4.7%;">
+            <div class="row d-flex align-items-center">
+                <div class="col-auto">
+                    <i class="fa fa fa-home" style="font-size: 30px;color:#00cc00"></i>
+                </div>
+                <div class="col">
+                    <h5 class="f-w-300">0</h5>
+                    <span class="d-block" style="margin-top: -2%;color:#00cc00">Work from home</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 3%; margin-left: 3.5%; width: 29%; height: 25%;">
+        <div class="card-block" style="margin-top : -4.7%;">
+            <div class="row d-flex align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-user-clock" style="font-size: 30px;color:#ffcc00;"></i>
+                </div>
+                <div class="col">
+                    <h5 class="f-w-300">{{late_num}}</h5>
+                    <span class="d-block" style="margin-top: -2%;color:#ffcc00;">Late</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: -6.23%; margin-left: 35%; width: 29%; height: 25%;">
+        <div class="card-block" style="margin-top : -4.7%;">
+            <div class="row d-flex align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-user-alt-slash" style="font-size: 30px;color:#ff3300;"></i>
+                </div>
+                <div class="col">
+                    <h5 class="f-w-300">{{absence_num}}</h5>
+                    <span class="d-block" style="margin-top: -2%;color:#ff3300;">Absence</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="width: 33%; margin-top:-16.5%; margin-left:68%;">
+        
+        <div class="row">
+            <div class="form-group" style="margin-left: 1.5%; width: 100%;">
+                 <h5 style="height:100%;">Rules</h5>
+            </div>
+            
+            <div class="form-group" style="margin-left: 1.5%; margin-top: -2%;">
+                <h6 class="f-w-300">Recent threshold time : {{theshold_time}}</h6>
+                <form class="image" role="form"  method="POST" style="margin-top: 2%;">
+                    {% csrf_token %}
+                    <label for="appt" style="margin-top: 1%;">Late Time:</label>
+                    <input type="time" id="appt" name="appt"  style="margin-top: 2%;">
+                    <input type="submit" name="submitform1">
+                </form>
+            </div>   
+            
+            <div class="form-group" style="margin-left:1.5%;margin-top:2%" >
+                <h6 class="f-w-300">Recent threshold temperature : {{theshold_temp}} C.</h6>
+                <form class="image" role="form"  method="POST" >
+                    {% csrf_token %}
+                    <label for="appt2">Temp:</label>
+                    <input type="number" id="appt2" name="appt2" step="0.01" style="margin-top: 2.5%;">
+                    <input type="submit" name="submitform2">
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="position:absolute; height:20%; width:83%; margin-left:3.36%; margin-top: 40.6%;">
+    <h4 class="mb-0" style="margin-top:0.5%; margin-left:3.5%;">Reports</h4>
+    <h5 class="mb-0" style="margin-top:2%; margin-left:5%;"><a href="{% url 'timeline' %}">Timeline</a></h5>
+    <p class="mb-0" style="margin-top:1%; margin-left:5%;">Display Real-Time Clocking.</p>
+    <h5 class="mb-0" style="margin-top:-4.82%; margin-left:25%;"><a href="{% url 'timesheet' %}">Timesheets</a></h5>
+    <p class="mb-0" style="margin-top:1%; margin-left:25%;">Displays Clocking Reports in Table Format.</p>
+
+    <h4 class="mb-0" style="margin-top:-9%; margin-left:57%;">Register</h4>
+    <h5 class="mb-0" style="margin-top:1.6%; margin-left:57%;"><a href="{% url 'register' %}">Register</a></h5>
+    <p class="mb-0" style="margin-top:1%; margin-left:57%;">Register employee to the system.</p>
+
+    <h4 class="mb-0" style="margin-top:-9%; margin-left:82.5%;">My Portal</h4>
+    <h5 class="mb-0" style="margin-top:1.6%; margin-left:82.5%;"><a href="{{profile.get_url}}">Profile</a></h5>
+    <p class="mb-0" style="margin-top:1%; margin-left:82.5%;">Edit your profile.</p>
+</div>
 {% endblock %}

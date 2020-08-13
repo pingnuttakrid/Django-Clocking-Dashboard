@@ -3,6 +3,7 @@ from django.urls import reverse
 # Create your models here.
 class Status(models.Model):
       name = models.CharField(max_length=255)
+      description = models.CharField(max_length=255)
       slug = models.SlugField(max_length=255)
     
       def __str__(self):
@@ -10,6 +11,11 @@ class Status(models.Model):
 
       def get_url(self):
          return reverse('employee_by_status',args=[self.slug])
+
+
+def upload_path_handler(Employee,filename):
+    return "employee/{id}/{file}".format(id=Employee.employee_id,file=filename)
+
 
 class Employee(models.Model):
       employee_id = models.CharField(max_length=5)
@@ -32,12 +38,12 @@ class Employee(models.Model):
       ovcontact = models.CharField(max_length=10)
       emerseaadresss =  models.CharField(max_length=300)
       emercontact = models.CharField(max_length=10)
-      imgprofile = models.ImageField(upload_to ='employee',null=True,default ='none/no-img.jpg')
-      imgstraight = models.ImageField(upload_to ='employee',null=True,default ='none/no-img.jpg')
-      imgtop = models.ImageField(upload_to ='employee',null=True,default ='none/no-img.jpg')
-      imgbottom = models.ImageField(upload_to ='employee',null=True,default ='none/no-img.jpg')
-      imgleft = models.ImageField(upload_to ='employee',null=True,default ='none/no-img.jpg')
-      imgright = models.ImageField(upload_to ='employee',null=True,default ='none/no-img.jpg')
+      imgprofile = models.ImageField(upload_to =upload_path_handler,null=True,default ='none/no-img.jpg')
+      imgstraight = models.ImageField(upload_to =upload_path_handler,null=True,default ='none/no-img.jpg')
+      imgtop = models.ImageField(upload_to =upload_path_handler,null=True,default ='none/no-img.jpg')
+      imgbottom = models.ImageField(upload_to =upload_path_handler,null=True,default ='none/no-img.jpg')
+      imgleft = models.ImageField(upload_to =upload_path_handler,null=True,default ='none/no-img.jpg')
+      imgright = models.ImageField(upload_to=upload_path_handler,null=True,default ='none/no-img.jpg')
       
       def __str__(self):
         return self.employee_id
@@ -64,5 +70,12 @@ class Image_Clocking(models.Model):
     
 class Threshold_Clocking(models.Model):
     time = models.TimeField()
-	
+    datetime = models.DateTimeField(auto_now_add=True)
+    
+class Threshold_Temperature(models.Model):
+    temp = models.FloatField()
+    datetime = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.temp
     
