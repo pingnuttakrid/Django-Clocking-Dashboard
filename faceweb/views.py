@@ -328,36 +328,74 @@ def timeline(request):
      
      if start_hour>current_hour:
          duration = start_hour - current_hour
+         
+         hours = []   
+         for i in range (-2,duration+1):
+              duration_hour = start_hour + i
+              duration_hour = str(duration_hour) +":00"
+              hours.append(duration_hour)
+              
+         graphs={}      
+         for i in range(0,len(hours)-1) :
+              time = {}
+              clocking_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
+              late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
+              hr = int(hours[i][0:1])
+              if hr > start_hour:
+                  late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
+              absence_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+              time['duration'] = "{}-{}".format(hours[i],hours[i+1]) 
+              time['clocking'] = clocking_du 
+              time['late'] = late_du
+              time['absence']= absence_du
+              graphs['graph{}'.format(i)] = time
+             
      elif current_hour > start_hour:
          duration = current_hour - start_hour 
-       
+         
+         hours = []   
+         for i in range (-2,duration+1):
+              duration_hour = start_hour + i
+              duration_hour = str(duration_hour) +":00"
+              hours.append(duration_hour)
+              
+         graphs={}      
+         for i in range(0,len(hours)-1) :
+              time = {}
+              clocking_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
+              late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
+              hr = int(hours[i][0:1])
+              if hr > start_hour:
+                  late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
+              absence_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+              time['duration'] = "{}-{}".format(hours[i],hours[i+1]) 
+              time['clocking'] = clocking_du 
+              time['late'] = late_du
+              time['absence']= absence_du
+              graphs['graph{}'.format(i)] = time
      
-     
-     hours = []   
-     for i in range (-2,duration+1):
-         duration_hour = start_hour + i
-         duration_hour = str(duration_hour) +":00"
-         hours.append(duration_hour)
-     
-        
-        
-     graphs={}      
-     for i in range(0,len(hours)-1) :
-         time = {}
-         clocking_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
-         late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
-         hr = int(hours[i][0:1])
-         if hr > start_hour:
-             late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
-         absence_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
-         time['duration'] = "{}-{}".format(hours[i],hours[i+1]) 
-         time['clocking'] = clocking_du 
-         time['late'] = late_du
-         time['absence']= absence_du
-         graphs['graph{}'.format(i)] = time
-     
-     
-     
+     elif current_hour == start_hour:
+             hours = []
+             for i in range (-3,1):
+                 duration_hour = start_hour + i
+                 duration_hour = str(duration_hour) +":00"
+                 hours.append(duration_hour)
+             
+             graphs={}      
+             for i in range(0,len(hours)-1) :
+                 time = {}
+                 clocking_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
+                 late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
+                 hr = int(hours[i][0:1])
+                 if hr > start_hour:
+                     late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
+                 absence_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+                 time['duration'] = "{}-{}".format(hours[i],hours[i+1]) 
+                 time['clocking'] = clocking_du 
+                 time['late'] = late_du
+                 time['absence']= absence_du
+                 graphs['graph{}'.format(i)] = time
+         
      year = now.year
      day = now.strftime("%A")
      date = now.strftime("%d")
