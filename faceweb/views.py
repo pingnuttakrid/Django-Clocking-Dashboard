@@ -106,8 +106,6 @@ def employees(request,status_slug=None):
       
         csv_file = request.FILES['file']
         
-        print(csv_file.name)
-        
         if not csv_file.name.endswith('.csv'):
             messages.error(request, 'THIS IS NOT A CSV FILE')
             return render(request,'employees.html',{'employees':employees,'status':status_page,'status_detail':status_de})
