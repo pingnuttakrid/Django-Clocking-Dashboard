@@ -25,11 +25,11 @@ from faceweb.models import Employee
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-'''user=User.objects.all().latest('last_login')
+user=User.objects.all().latest('last_login')
 email = user.email
 profile = Employee.objects.all().filter(email=email)[0]
 status_slug = profile.status.slug
-slug = profile.slug'''
+slug = profile.slug
 
 urlpatterns = [
     path('admin/', admin.site.urls),
