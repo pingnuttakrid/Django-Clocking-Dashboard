@@ -53,7 +53,7 @@ class Employee(models.Model):
 
 class Clocking(models.Model):
         ref_id = models.CharField(max_length=10,unique=True)
-        door = models.CharField(max_length=5)
+        door = models.CharField(max_length=2)
         temp = models.FloatField()
         date = models.DateField()
         time = models.TimeField()
