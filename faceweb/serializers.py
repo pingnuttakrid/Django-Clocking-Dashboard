@@ -12,7 +12,7 @@ class ClockingSerializer(ModelSerializer):
    class Meta:
       model = Clocking
       fields = [
-         'employee_id',
+         'ref_id',
          'door',
          'temp',
          'date',

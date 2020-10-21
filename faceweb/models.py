@@ -18,7 +18,7 @@ def upload_path_handler(Employee,filename):
 
 
 class Employee(models.Model):
-      employee_id = models.CharField(max_length=5)
+      employee_id = models.CharField(max_length=5ืื,ีีunique=True)
       title = models.CharField(max_length=5 )
       firstname = models.CharField(max_length=255)
       lastname = models.CharField(max_length=255)
@@ -52,7 +52,7 @@ class Employee(models.Model):
         return reverse('employee_detail',args=[self.status.slug,self.slug])
 
 class Clocking(models.Model):
-        employee_id = models.ForeignKey(Employee,on_delete=models.CASCADE)
+        ref_id = models.CharField(max_length=10ืื,ีีunique=True)
         door = models.CharField(max_length=5)
         temp = models.FloatField()
         date = models.DateField()
