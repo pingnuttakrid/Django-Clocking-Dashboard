@@ -52,7 +52,7 @@ class Employee(models.Model):
         return reverse('employee_detail',args=[self.status.slug,self.slug])
 
 class Clocking(models.Model):
-        ref_id = models.CharField(max_length=10ืื,ีีunique=True)
+        ref_id = models.CharField(max_length=10,unique=True)
         door = models.CharField(max_length=5)
         temp = models.FloatField()
         date = models.DateField()
