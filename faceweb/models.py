@@ -18,7 +18,7 @@ def upload_path_handler(Employee,filename):
 
 
 class Employee(models.Model):
-      employee_id = models.CharField(max_length=5ืื,ีีunique=True)
+      employee_id = models.CharField(max_length=5,unique=True)
       title = models.CharField(max_length=5 )
       firstname = models.CharField(max_length=255)
       lastname = models.CharField(max_length=255)
