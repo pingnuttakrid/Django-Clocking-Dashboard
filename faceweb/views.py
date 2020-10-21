@@ -69,7 +69,7 @@ def index(request):
     date = now.strftime("%d")
     month = now.strftime("%B")
     
-    current_date = now.date()
+    '''current_date = now.date()'''
     
     theshold_time = Threshold_Clocking.objects.latest('id')
     theshold_time = theshold_time.time
@@ -77,17 +77,17 @@ def index(request):
     theshold_temp = Threshold_Temperature.objects.latest('id')
     theshold_temp = theshold_temp.temp
     
-    clocking_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).count()
+    '''clocking_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).count()
     late_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).count()
-    absence_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+    absence_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()'''
     
     user=User.objects.all().latest('last_login')
     email = user.email
     profile = Employee.objects.all().filter(email=email)[0]
     
     
-    return render(request,'index.html',{'year':year,'day':day,'date':date,'month':month,'clocking_num':clocking_num,'late_num':late_num,'absence_num':absence_num,'theshold_time':theshold_time,'theshold_temp':theshold_temp,'profile':profile})
-
+    return render(request,'index.html',{'year':year,'day':day,'date':date,'month':month,'theshold_time':theshold_time,'theshold_temp':theshold_temp,'profile':profile})
+    ''','clocking_num':clocking_num,'late_num':late_num,'absence_num':absence_num'''
 
 @login_required(login_url='home')
 def employees(request,status_slug=None):
