@@ -198,7 +198,7 @@ def employeePage(request,status_slug,employee_slug):
     return render(request,'employee.html',{'employee':employee,'form':form,'form_image':form_image})
 
 
-@login_required(login_url='home')
+'''@login_required(login_url='home')
 def employeeTable(request,slug):
     employee = None
     employee_id = None
@@ -209,7 +209,7 @@ def employeeTable(request,slug):
     clocking_filter = ClockingFilter(request.GET,queryset=clocking)
     clocking = clocking_filter.qs 
     
-    return render(request,'employeeTable.html',{'clockings':clocking,'employee':employee,'filter':clocking_filter})
+    return render(request,'employeeTable.html',{'clockings':clocking,'employee':employee,'filter':clocking_filter})'''
 
 
 

@@ -18,7 +18,7 @@ def upload_path_handler(Employee,filename):
 
 
 class Employee(models.Model):
-      employee_id = models.CharField(max_length=5)
+      employee_id = models.CharField(max_length=5,unique=True)
       title = models.CharField(max_length=5 )
       firstname = models.CharField(max_length=255)
       lastname = models.CharField(max_length=255)
@@ -62,8 +62,8 @@ class Clocking(models.Model):
         def __str__(self):
             return self.door
         
-        def get_url(self):
-            return reverse('employee_Table',args=[self.employee_id.slug])
+        '''def get_url(self):
+            return reverse('employee_Table',args=[self.employee_id.slug])'''
 
 class Image_Clocking(models.Model):
 	model_pic = models.ImageField(upload_to ='clocking',null=True,default ='none/no-img.jpg')
