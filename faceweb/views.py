@@ -56,7 +56,7 @@ def admin(request):
     status_slug = profile.status.slug
     slug = profile.slug
     
-    return redirect('employee/{}/{}'.format(status_slug,slug))
+    return redirect('/employee/{}/{}/'.format(status_slug,slug))
 
 
 @login_required(login_url='home')
