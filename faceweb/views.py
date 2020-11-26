@@ -16,7 +16,6 @@ from django.contrib.auth.models import User
 import csv, io
 
 
-
 # Create your views here.
 class ClockingCreateAPIView(CreateAPIView):
     serializer_class = ClockingSerializer
@@ -48,6 +47,17 @@ def home(request):
 def signout(request):
     logout(request)
     return redirect('home') 
+
+@login_required(login_url='home')
+def admin(request):
+    user=User.objects.all().latest('last_login')
+    email = user.email
+    profile = Employee.objects.all().filter(email=email)[0]
+    status_slug = profile.status.slug
+    slug = profile.slug
+    
+    return redirect('employee/{}/{}'.format(status_slug,slug))
+
 
 @login_required(login_url='home')
 def index(request):
