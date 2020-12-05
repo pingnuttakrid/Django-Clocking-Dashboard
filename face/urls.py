@@ -38,7 +38,7 @@ urlpatterns = [
     path('timeline/',views.timeline,name="timeline"),
     path('employee/<slug:status_slug>/<slug:employee_slug>',views.employeePage,name='employee_detail'),
     path('user/',views.admin,name='employee_admin'),
-    #path('employeeTable/<slug:slug>',views.employeeTable,name='employee_Table'),
+    path('employeeTable/<slug:slug>',views.employeeTable,name='employee_Table'),
        url(r'^rest/', include('faceweb.urls')),
        url(r'^image/', include('faceweb.urls')),	
 ]

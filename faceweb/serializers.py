@@ -13,6 +13,7 @@ class ClockingSerializer(ModelSerializer):
       model = Clocking
       fields = [
          'ref_id',
+         'employee_id',
          'door',
          'temp',
          'date',

@@ -53,6 +53,7 @@ class Employee(models.Model):
 
 class Clocking(models.Model):
         ref_id = models.CharField(max_length=10,unique=True)
+        employee_id = models.ForeignKey(Employee,on_delete=models.CASCADE)
         door = models.CharField(max_length=2)
         temp = models.FloatField()
         date = models.DateField()
@@ -62,8 +63,8 @@ class Clocking(models.Model):
         def __str__(self):
             return self.door
         
-        '''def get_url(self):
-            return reverse('employee_Table',args=[self.employee_id.slug])'''
+        def get_url(self):
+            return reverse('employee_Table',args=[self.employee_id.slug])
 
 class Image_Clocking(models.Model):
 	model_pic = models.ImageField(upload_to ='clocking',null=True,default ='none/no-img.jpg')
