@@ -90,9 +90,9 @@ def index(request):
     theshold_temp = theshold_temp.temp
     
     
-    clocking_num = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).count()
-    late_num = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).count()
-    absence_num = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+    clocking_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).count()
+    late_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).count()
+    absence_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
     
     
     
@@ -170,7 +170,7 @@ def employees(request,status_slug=None):
 def timesheet(request):
     clocking = None
 
-    clocking = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'))
+    clocking = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'))
 
     date = datetime.date.today()
     clocking_filter = ClockingFilter(request.GET,queryset=clocking)
@@ -354,12 +354,12 @@ def timeline(request):
          graphs={}      
          for i in range(0,len(hours)-1) :
               time = {}
-              clocking_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
-              late_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
+              clocking_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
+              late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
               hr = int(hours[i][0:1])
               if hr > start_hour:
-                  late_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
-              absence_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+                  late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
+              absence_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
               
               hr = int(hours[i][0:1])
               if hr > start_hour:
@@ -382,13 +382,13 @@ def timeline(request):
          graphs={}      
          for i in range(0,len(hours)-1) :
               time = {}
-              clocking_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
-              late_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
+              clocking_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
+              late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
               
               hr = int(hours[i][0:1])
               if hr > start_hour:
-                  late_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
-              absence_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+                  late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
+              absence_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
               time['duration'] = "{}-{}".format(hours[i],hours[i+1]) 
               time['clocking'] = clocking_du 
               time['late'] = late_du
@@ -405,13 +405,13 @@ def timeline(request):
              graphs={}      
              for i in range(0,len(hours)-1) :
                  time = {}
-                 clocking_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
-                 late_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
+                 clocking_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte=theshold_time).count()
+                 late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time).count()
                  hr = int(hours[i][0:1])
                  if hr > start_hour:
                      
-                     late_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
-                 absence_du = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+                     late_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt =theshold_time,time__lte=hours[i+1]).count()
+                 absence_du = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
                 
                  time['duration'] = "{}-{}".format(hours[i],hours[i+1]) 
                  time['clocking'] = clocking_du 
@@ -424,14 +424,14 @@ def timeline(request):
      date = now.strftime("%d")
      month = now.strftime("%B")
      
-     clocking = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).order_by('-time')
-     late = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).order_by('-time')
-     absence = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date)
+     clocking = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).order_by('-time')
+     late = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).order_by('-time')
+     absence = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date)
      
      
-     clocking_num = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).count()
-     late_num = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).count()
-     absence_num = Clocking.objects.annotate(most_recent=Max('ref_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
+     clocking_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__lte = theshold_time).count()
+     late_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent'),date = current_date,time__gt = theshold_time).count()
+     absence_num = Clocking.objects.annotate(most_recent=Max('employee_id__clocking__datetime')).filter(datetime=F('most_recent')).exclude(date = current_date).count()
      
      total = clocking_num+absence_num+late_num
      
